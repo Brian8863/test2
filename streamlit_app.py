@@ -12,6 +12,8 @@ uploaded_file = st.file_uploader("📥 請上傳 Excel 題庫檔（需含：ID�
 if uploaded_file:
     try:
         df = pd.read_excel(uploaded_file)
+        df.columns = df.columns.str.strip()
+        df["答案"] = df["答案"].astype(str).str.strip()
         st.success("✅ 成功讀取 Excel 檔案")
         st.write("欄位名稱：", df.columns.tolist())
 
